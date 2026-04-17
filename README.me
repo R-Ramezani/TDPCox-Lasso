@@ -1,0 +1,198 @@
+# Time-Dependent Cox Models with LASSO: Simulation and Real Data Analysis
+
+## 📌 Overview
+
+This repository provides a comprehensive implementation of LASSO-penalized estimation for **time-dependent Cox proportional hazards models**, including:
+
+* A custom **C++-based coordinate descent algorithm (AACD)** for efficient LASSO path computation
+* A benchmark comparison with **standard LASSO (glmnet)**
+* Extensive **Monte Carlo simulation studies**
+* Application to a real-world dataset: **Primary Biliary Cirrhosis (PBC)**
+
+The implementation focuses on both **statistical accuracy** and **computational efficiency**, making it suitable for high-dimensional survival analysis.
+
+---
+
+## 📂 Repository Structure
+
+```
+project/
+│── cox_simulation_lasso.R        # Monte Carlo simulation study
+│── pbc_realdata_analysis.R      # Real data analysis (PBC dataset)
+│── fit_cox_lasso.cpp            # Core C++ implementation (AACD algorithm)
+│── README.md                    # Project documentation
+```
+
+---
+
+## ⚙️ Requirements
+
+### R Packages
+
+The following R packages are required:
+
+* survival
+* glmnet
+* timeROC
+* Rcpp
+* RcppArmadillo
+* openxlsx
+* dplyr
+
+All required packages are automatically installed within the scripts if missing.
+
+---
+
+## 🚀 How to Run
+
+### 1. Clone the repository
+
+```
+git clone https://github.com/YOUR_USERNAME/YOUR_REPO.git
+cd YOUR_REPO
+```
+
+---
+
+### 2. Run Simulation Study
+
+```
+source("cox_simulation_lasso.R")
+```
+
+This script:
+
+* Generates synthetic time-dependent survival data
+* Fits AACD and LASSO models
+* Computes performance metrics (FP, FN, Precision, Recall, F1)
+* Saves results into an Excel file
+
+---
+
+### 3. Run Real Data Analysis (PBC Dataset)
+
+```
+source("pbc_realdata_analysis.R")
+```
+
+This script:
+
+* Constructs time-dependent covariates using `tmerge`
+* Fits both AACD and glmnet LASSO models
+* Computes:
+
+  * C-index
+  * Time-dependent AUC (1, 3, 5 years)
+  * Coefficients and standard errors
+* Saves results to:
+
+```
+Results_PBC_DataSet.xlsx
+```
+
+---
+
+## 🧠 Methodology
+
+### AACD Algorithm
+
+The proposed method is based on:
+
+* **Adaptive Active-set Coordinate Descent (AACD)**
+* Efficient computation of the **regularization path**
+* Model selection using **BIC / EBIC**
+
+### Key Features
+
+* Handles **time-dependent covariates**
+* Scalable to **high-dimensional settings (p >> n)**
+* Faster convergence compared to standard methods
+
+---
+
+## 📊 Outputs
+
+### Simulation Study
+
+* Mean and standard deviation of coefficients
+* False Positives (FP), False Negatives (FN)
+* Precision, Recall, F1-score
+* Runtime statistics
+
+### Real Data Analysis
+
+* Model coefficients + standard errors
+* C-index
+* Time-dependent AUC
+* Execution time
+
+---
+
+## 📈 Dataset
+
+### PBC Dataset
+
+The real data analysis uses the **Primary Biliary Cirrhosis (PBC)** dataset from the `survival` package:
+
+* Includes longitudinal measurements
+* Converted into time-dependent format using `tmerge`
+* Widely used benchmark in survival analysis
+
+---
+
+## 🧾 Reproducibility
+
+* All simulations are reproducible using:
+
+```
+set.seed(123)
+```
+
+* C++ code is compiled via **Rcpp** for performance
+
+---
+
+## 📌 Citation
+
+If you use this code in your research, please cite:
+
+```
+[Author Name], "An Efficient LASSO Estimation for Time‑Dependent Cox Models via Adaptive Active‑Set Coordinate Descent", [2026].
+```
+
+Or use BibTeX:
+
+```
+@article{ramezani2026aacd,
+  title   = {An Efficient LASSO Estimation for Time‑Dependent Cox Models via Adaptive Active‑Set Coordinate Descent},
+  author  = {Rohollah Ramezani and Mohammad Reza Rabiei and Mohammad Arashi},
+  year    = {2026}
+}
+```
+
+---
+
+## 📬 Contact
+
+For questions or collaborations:
+
+* Email: [stat.ramezani@gmail.com](mailto:stat.ramezani@gmail.com)
+* GitHub: https://github.com/R-Ramezani/TDPCox-Lasso.git
+
+---
+
+## ⭐ Acknowledgments
+
+This work builds upon:
+
+* The `glmnet` package for LASSO regression
+* The `survival` package for Cox modeling
+
+---
+
+## ⚠️ Notes
+
+* Ensure that the file `fit_cox_lasso.cpp` is in the working directory before running scripts
+* Large simulations may require significant computation time
+
+---
